@@ -294,7 +294,7 @@ function Create-UvEnv {
     Write-Color -Text ">>> ", "Creating and activating venv ... " -Color Green, Gray
     uv venv --allow-existing --python 3.9 .venv
     Write-Color -Text ">>> ", "Compiling dependencies ... " -Color Green, Gray
-    uv pip compile pyproject.toml windows-requirements.in -o requirements.txt
+    uv pip compile --all-extras pyproject.toml windows-requirements.in -o requirements.txt
     Write-Color -Text ">>> ", "Installing dependencies ... " -Color Green, Gray
     uv pip install -r requirements.txt
     Install-PrecommitHook
