@@ -118,7 +118,7 @@ function Install-Poetry() {
 
 function Install-Uv() {
     Write-Color -Text ">>> ", "Installing uv ... " -Color Green, Gray
-    powershell -c "irm https://astral.sh/uv/install.ps1 | iex"   
+    powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 }
 
 
@@ -292,7 +292,7 @@ function Create-UvEnv {
     # note that uv venv can use .python-version marker file to determine what python version to use
     # so you can safely use pyenv to manage python versions
     Write-Color -Text ">>> ", "Creating and activating venv ... " -Color Green, Gray
-    uv venv --allow-existing .venv
+    uv venv --allow-existing --python 3.9 .venv
     Write-Color -Text ">>> ", "Compiling dependencies ... " -Color Green, Gray
     uv pip compile pyproject.toml windows-requirements.in -o requirements.txt
     Write-Color -Text ">>> ", "Installing dependencies ... " -Color Green, Gray
@@ -343,7 +343,7 @@ function Create-Env {
 }
 
 
-    function Install-PrecommitHook {   
+    function Install-PrecommitHook {
         if (Test-Path -PathType Container -Path "$($repo_root)\.git") {
             Write-Color -Text ">>> ", "Installing pre-commit hooks ..." -Color Green, White
             & $repo_root\.venv\Scripts\pre-commit install
